@@ -1,0 +1,40 @@
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Factorial of a number</title>
+</head>
+
+<body>
+  <input id="number" placeholder="Input a number" type="number">
+  <button id="submit">Factorial</button>
+  <h4>Outputs</h4>
+  <ul id="list"></ul>
+</body>
+<script>
+  document.getElementById('submit').addEventListener('click', async function (event) {
+    const list = document.getElementById('list');
+    let url = 'http://';
+    url += window.location.host;
+    url += '/factorial';
+    try {
+      const resp = await fetch(url, {     // 1 
+        method: 'POST',
+        body: document.getElementById('number').value
+      });
+
+      if (resp.ok) {
+        const body = await resp.text()                                   // 2
+        const newElement = document.createElement('li');
+        newElement.textContent = body;
+        list.insertBefore(newElement, list.firstChild);
+      } else {
+        console.error(r)
+      };
+    } catch (err) {
+      console.error(err)
+    }
+  })
+</script>
+
+</html>

@@ -1,8 +1,7 @@
 module ToDoApp
-using Dates
+using Dates   # to make the Date type available
 
-export print_todo
-export ToDo
+export print_todo, ToDo
 
 mutable struct ToDo
   id::Int32
@@ -25,3 +24,5 @@ function helper(todo)
 end
 
 end
+
+
