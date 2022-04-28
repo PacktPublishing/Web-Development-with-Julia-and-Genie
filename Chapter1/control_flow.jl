@@ -18,13 +18,3 @@ else
   println("Better do todo1 first")
 end
 # "Better do todo2 first"
-
-for i in todo1
-  println(i)
-  end
-# 1
-# Getting groceries
-# false
-# 2022-04-01
-# 5
-

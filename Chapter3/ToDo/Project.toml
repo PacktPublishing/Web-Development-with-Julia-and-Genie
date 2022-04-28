@@ -1,0 +1,4 @@
+name = "ToDo"
+uuid = "9d4673fc-7bc3-4428-879c-3830c17675b6"
+authors = ["Ivo-Balbaert <ivo.balbaert@telenet.be>"]
+version = "0.1.0"
