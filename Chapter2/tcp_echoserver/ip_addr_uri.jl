@@ -4,6 +4,15 @@ using Sockets
 addr = ip"185.43.124.6"    # this uses the @ip_str macro  
 typeof(addr)               # IPv4
 
+connect("julialang.org", 80)
+# TCPSocket(Base.Libc.WindowsRawSocket(0x00000000000003ec) open, 0 bytes waiting)
+getaddrinfo("julialang.org")
+# ip"151.101.130.49"
+
+# Installing URIs
+# (@v1.8) pkg> add URIs, HTTP
+using URIs, HTTP
+
 # URIs:
 req = HTTP.Request(         
 "GET", 		                         

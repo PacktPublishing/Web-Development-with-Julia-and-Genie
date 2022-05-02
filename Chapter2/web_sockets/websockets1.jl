@@ -1,3 +1,4 @@
+# (@v1.8) pkg> add WebSockets
 using WebSockets
 
 function main()

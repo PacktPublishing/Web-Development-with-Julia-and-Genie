@@ -1,12 +1,12 @@
 using HTTP, JSON
 
 todos = Dict(     # type is Dict{Int64, String}
-               1 => "Getting groceries",
-               2 => "Visiting my therapist",
-               3 => "Getting a haircut"
+    1 => "Getting groceries",
+    2 => "Visiting my therapist",
+    3 => "Getting a haircut"
 )
 
-json_string = JSON.json(todos)
+json_string = JSON.json(todos)      # 1
 # "{\"2\":\"Visiting my therapist\",\"3\":\"Getting a haircut\",\"1\":\"Getting groceries\"}"
 todos2 = JSON.parse(json_string)
 # Dict{String, Any} with 3 entries:
@@ -15,10 +15,10 @@ todos2 = JSON.parse(json_string)
 #   "3" => "Getting a haircut"
 
 resp = HTTP.Response(
-               200,
-               ["Content-Type" => "application/json"],
-               body=JSON.json(todos)
-           )
+    200,
+    ["Content-Type" => "application/json"],
+    body=JSON.json(todos)
+)
 
 # HTTP.Messages.Response:
 # """

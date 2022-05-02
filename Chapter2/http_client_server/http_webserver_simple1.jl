@@ -1,4 +1,4 @@
-# start in REPL or via: julia htttp_webserver_simple.jl:
+# start in REPL or with: julia htttp_webserver_simple.jl:
 using HTTP
 
 HTTP.listen() do http                       # 1

@@ -2,11 +2,11 @@
 using HTTP
 
 ## Request:
-req = HTTP.Request(         
-"GET", 		                         # 1 - Could be GET, POST, UPDATE etc
-"http://localhost:8081/search",       # 2 - URL - 		            
-["Content-Type" => "text/plain"],  # 3 - Header fields -                  
-"Hi there!"                        # 4 - Payload/body
+req = HTTP.Request(
+   "GET",                        # 1 - Could be GET, POST, UPDATE etc
+   "http://localhost:8081/search",    # 2 - URL - 		            
+   ["Content-Type" => "text/plain"],  # 3 - Header fields -                  
+   "Hi there!"                        # 4 - Payload/body
 )
 
 # 1
@@ -34,12 +34,13 @@ HTTP.payload(req)
 #  0x21
 String(HTTP.payload(req))
 # "Hi there!"
+splitpath(req.target)[2]#  returns "search" 
 
 ## Response:
 resp = HTTP.Response(
    200,                       # 1 - Status code, 200 means success.
    ["Content-Type" => "text/plain"], # 2 - Header fields -
-   body = "Hi there!"         # 3 - Payload/body
+   body="Hi there!"         # 3 - Payload/body
 )
 
 # 1:
