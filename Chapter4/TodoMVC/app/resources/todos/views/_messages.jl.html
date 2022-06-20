@@ -1,0 +1,11 @@
+<% if ! isempty(params(:success, "")) %>
+  <div class="alert alert-success" role="alert">
+    <% params(:success) %>
+  </div>
+<% elseif ! isempty(params(:error, "")) %>
+  <div class="alert alert-danger" role="alert">
+    <% params(:error) %>
+  </div>
+<% else %>
+  <br/>
+<% end %>

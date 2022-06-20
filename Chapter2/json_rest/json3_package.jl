@@ -1,8 +1,8 @@
 using HTTP, JSON3
-todos = Dict(     # type is Dict{Int64, String}
-               1 => "Getting groceries",
-               2 => "Visiting my therapist",
-               3 => "Getting a haircut"
+todos = Dict(  # type is Dict{Int64, String}
+    1 => "Getting groceries",
+    2 => "Visiting my therapist",
+    3 => "Getting a haircut"
 )
 
 json_string = JSON3.write(todos)
@@ -16,10 +16,10 @@ todos2 = JSON3.read(json_string)
 todos2[1]  # "Getting groceries"
 
 resp = HTTP.Response(
-               200,
-               ["Content-Type" => "application/json"],
-               body=JSON3.write(todos)
-           )
+    200,
+    ["Content-Type" => "application/json"],
+    body=JSON3.write(todos)     # 1
+)
 
 # HTTP.Messages.Response:
 # """
@@ -28,9 +28,9 @@ resp = HTTP.Response(
 
 # {"2":"Visiting my therapist","3":"Getting a haircut","1":"Getting groceries"}"""
 
-body = HTTP.payload(resp) # this gives a Vector of UInt8 bytes
-io = IOBuffer(body)
-todos = JSON3.read(io)
+body = HTTP.payload(resp) # 2 - this gives a Vector of UInt8 bytes
+io = IOBuffer(body)       # 3
+todos = JSON3.read(io)    # 4
 # or combined in one line:
 todos = JSON3.read(IOBuffer(HTTP.payload(resp)))
 # JSON3.Object{Base.CodeUnits{UInt8, String}, Vector{UInt64}} with 3 entries:

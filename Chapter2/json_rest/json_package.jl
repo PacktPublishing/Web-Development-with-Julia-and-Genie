@@ -17,7 +17,7 @@ todos2 = JSON.parse(json_string)
 resp = HTTP.Response(
     200,
     ["Content-Type" => "application/json"],
-    body=JSON.json(todos)
+    body=JSON.json(todos)  # 1
 )
 
 # HTTP.Messages.Response:
@@ -27,9 +27,9 @@ resp = HTTP.Response(
 
 # {"2":"Visiting my therapist","3":"Getting a haircut","1":"Getting groceries"}"""
 
-body = HTTP.payload(resp) # this gives a Vector of UInt8 bytes
-io = IOBuffer(body)
-todos = JSON.parse(io)
+body = HTTP.payload(resp) # 2 - a Vector of UInt8 bytes
+io = IOBuffer(body)       # 3 
+todos = JSON.parse(io)    # 4
 # Dict{String, Any} with 3 entries:
 #   "1" => "Getting groceries"
 #   "2" => "Visiting my therapist"
