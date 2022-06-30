@@ -1,0 +1,18 @@
+<% partial("app/resources/todos/views/_messages.jl.html") %>
+<% partial("app/resources/todos/views/_form.jl.html") %>
+<% if isempty(todos) %> 
+  <p>Nothing to do!</p> 
+<% else %> 
+  <div class="row"> 
+    <ul class="list-group"> 
+      <% for_each(todos) do todo %> 
+        <li class="list-group-item form-check form-switch"> 
+          <input type="checkbox" checked="$(todo.completed ? true : false)" class="form-check-input" id="todo_$(todo.id)"  value="$(todo.id)" /> 
+          <label class='form-check-label $(todo.completed ? "completed" : "")' data-original="$(todo.todo)" data-todo-id="$(todo.id)">$(todo.todo)</label>
+          <button class="btn btn-outline-danger invisible" type="button" value="$(todo.id)">Delete</button>
+        </li> 
+      <% end %> 
+    </ul> 
+  </div> 
+<% end %>
+<% partial("app/resources/todos/views/_filters.jl.html") %> 

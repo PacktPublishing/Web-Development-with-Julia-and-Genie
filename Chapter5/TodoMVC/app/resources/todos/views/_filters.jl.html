@@ -1,0 +1,11 @@
+<div class="btn-group" role="group">
+  <a class="btn btn-outline-primary $(active())" href="/">
+    All <span class="badge bg-secondary">$(alltodos)</span>
+  </a>
+  <a class='btn btn-outline-primary $(active("notdone"))' href="/?filter=notdone">
+    Not done <span class="badge bg-secondary">$(notdonetodos)</span>
+  </a>
+  <a class='btn btn-outline-primary $(active("done"))' href="/?filter=done">
+    Completed <span class="badge bg-secondary">$(donetodos)</span>
+  </a>
+</div>
