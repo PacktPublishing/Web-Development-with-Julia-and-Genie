@@ -22,4 +22,4 @@ end)
 println(client, "Hello World from the Echo Server")  # 5
 # Hello World from the Echo Server
 
-close(client)                                         # 6
+                                           # 6

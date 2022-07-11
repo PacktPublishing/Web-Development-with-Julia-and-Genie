@@ -1,14 +1,14 @@
 using HTTP, Sockets, JSON3, Dates
 
 mutable struct ToDo                      # 1
-  id::Int64
-  description::String
-  completed::Bool
-  created::Date
-  priority::Int8
+    id::Int64
+    description::String
+    completed::Bool
+    created::Date
+    priority::Int8
 end
 
-const ToDos = Dict{Int, ToDo}()          # 2   
+const ToDos = Dict{Int,ToDo}()          # 2   
 
 function initToDos()                     # 3
     todo1 = ToDo(1, "Getting groceries", false, Date("2022-04-01", "yyyy-mm-dd"), 5)
@@ -41,15 +41,15 @@ function getToDo(req::HTTP.Request)                     # 4
 end
 
 function deleteToDo(req::HTTP.Request)                  # 5
-    todoId = HTTP.URIs.splitpath(req.target)[3] 
+    todoId = HTTP.URIs.splitpath(req.target)[3]
     todo = ToDos[parse(Int64, todoId)]
     delete!(ToDos, todo.id)                             # 5A
     return HTTP.Response(200)                           # 5B
-end                                     
+end
 
 function createToDo(req::HTTP.Request)                      # 6
     todo = JSON3.read(IOBuffer(HTTP.payload(req)), ToDo)    # 6A
-    println(todo)   
+    println(todo)
     todo.id = maximum(collect(keys(ToDos))) + 1             # 6B
     ToDos[todo.id] = todo                                   # 6C
     println(ToDos)
@@ -63,10 +63,12 @@ function updateToDo(req::HTTP.Request)                       # 7
 end
 
 JSON3.StructType(::Type{<:ToDo}) = JSON3.Struct() # - needed to be able to work with JSON3
+# for more info see:
+# https://discourse.julialang.org/t/ann-json3-jl-yet-another-json-package-for-julia/25625?u=abhimanyuaryan
 initToDos()
 # println(ToDos)
 
-const HOST = "127.0.0.1"
+const HOST = ip"127.0.0.1"
 const PORT = 8080
 const ROUTER = HTTP.Router()
 HTTP.@register(ROUTER, "POST", "/api/todos", createToDo)        # 8A
