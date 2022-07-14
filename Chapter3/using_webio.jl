@@ -8,7 +8,7 @@ body!(w, dom"p"("Hello from WebIO and Blink!"))
 # showing a button with JS alert window on click:
 body!(w, dom"button"(
     "Greet",
-     events=Dict(
+    events=Dict(
         "click" => js"function() { alert('Hello, World!'); }",
     ),
-)
+))
