@@ -140,14 +140,12 @@ route("/api/v1/todos/:id::Int", TodosController.API.V1.delete, method = DELETE)
 ### Swagger UI route
 
 route("/api/v1/docs") do
-  render_swagger(
-    build(
-      OpenAPI("3.0", Dict("title" => "TodoMVC API", "version" => "1.0.0")),
-    ),
-    options = Options(
-      custom_favicon = "/favicon.ico",
-      custom_site_title = "TodoMVC app with Genie",
-      show_explorer = false
+    render_swagger(
+        build(OpenAPI("3.0", Dict("title" => "TodoMVC API", "version" => "1.0.0"))),
+        options = Options(
+            custom_favicon = "/favicon.ico",
+            custom_site_title = "TodoMVC app with Genie",
+            show_explorer = false,
+        ),
     )
-  )
 end
