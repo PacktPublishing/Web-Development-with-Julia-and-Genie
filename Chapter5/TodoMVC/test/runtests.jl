@@ -23,5 +23,5 @@ using Main.TodoMVC, Test, TestSetExtensions, Logging
 Logging.global_logger(NullLogger())
 
 @testset ExtendedTestSet "TodoMVC tests" begin
-  @includetests ARGS
+    @includetests ARGS
 end
