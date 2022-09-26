@@ -11,19 +11,19 @@ function timestamp_logger(logger)
 end
 
 function initialize_logging()
-  logger =  if Genie.config.log_to_file
-              isdir(Genie.config.path_log) || mkpath(Genie.config.path_log)
-              LoggingExtras.TeeLogger(
-                LoggingExtras.FileLogger(joinpath(Genie.config.path_log, "$(Genie.config.app_env)-$(Dates.today()).log"), always_flush = true, append = true),
-                Logging.ConsoleLogger(stdout, Genie.config.log_level)
-              )
-            else
-              Logging.ConsoleLogger(stdout, Genie.config.log_level)
-            end
+    logger = if Genie.config.log_to_file
+        isdir(Genie.config.path_log) || mkpath(Genie.config.path_log)
+        LoggingExtras.TeeLogger(
+            LoggingExtras.FileLogger(joinpath(Genie.config.path_log, "$(Genie.config.app_env)-$(Dates.today()).log"), always_flush=true, append=true),
+            Logging.ConsoleLogger(stdout, Genie.config.log_level)
+        )
+    else
+        Logging.ConsoleLogger(stdout, Genie.config.log_level)
+    end
 
-  LoggingExtras.TeeLogger(LoggingExtras.MinLevelLogger(logger, Genie.config.log_level)) |> timestamp_logger |> global_logger
+    LoggingExtras.TeeLogger(LoggingExtras.MinLevelLogger(logger, Genie.config.log_level)) |> timestamp_logger |> global_logger
 
-  nothing
+    nothing
 end
 
-initialize_logging()
+Genie.Logger.initialize_logging()

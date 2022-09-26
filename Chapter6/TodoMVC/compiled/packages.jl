@@ -7,3 +7,4 @@ const PACKAGES = [
   "SearchLightMySQL",
   "SwagUI",
   "SwaggerMarkdown"
+]
