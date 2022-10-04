@@ -1,0 +1,3 @@
+#!/bin/sh
+# julia --color=yes --depwarn=no --project=@. -q -i -- $(dirname $0)/../bootstrap.jl -s=true "$@"
+julia --color=yes --depwarn=no --project=@. --sysimage=compiled/sysimg.so -q -i -- $(dirname $0)/../bootstrap.jl -s=true "$@"
