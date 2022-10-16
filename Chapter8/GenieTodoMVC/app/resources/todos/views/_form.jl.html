@@ -1,0 +1,15 @@
+<div class="row">
+  <form method="POST" action="/todos" class="form-floating">
+    <div class="input-group mb-3">
+      <input type="text" class="form-control" placeholder="Add a new todo" name="todo" value='$(params(:todo, ""))' />
+      <input class="form-control" list="categories_list" name="category" placeholder="Todo category" value='$(params(:category, ""))' />
+      <datalist id="categories_list">
+        <% for_each(categories) do category %>
+          <option value="$category" />
+        <% end %>
+      </datalist>
+      <input type="number" class="form-control" placeholder="Duration in minutes" name="duration" value='$(params(:duration, ""))' min="5" max="240" step="5" />
+      <input type="submit" class="btn btn-outline-secondary" value="Add" />
+    </div>
+  </form>
+</div>

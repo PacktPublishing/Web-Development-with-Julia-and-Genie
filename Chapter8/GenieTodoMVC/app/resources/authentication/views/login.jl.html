@@ -1,0 +1,29 @@
+<h1 class="display-3">Login</h1>
+
+<div class="bs-callout bs-callout-primary">
+  <p>
+    Please authenticate in order to access the information.
+  </p>
+</div>
+
+<span>$(output_flash())</span>
+
+<form method="POST" action="$(linkto(:login))" class="" enctype="multipart/form-data">
+  <div class="form-group">
+    <label _for="auth_username">Username</label>
+    <input type="text" id="auth_username" name="username" class="form-control" placeholder="User" />
+  </div>
+
+  <div class="form-group">
+    <label _for="auth_password">Password</label>
+    <input type="password" id="auth_password" name="password" class="form-control" placeholder="Password" />
+  </div>
+
+  <input type="submit" value="Login" class="btn btn-primary" />
+</form>
+
+<div class="bs-callout bs-callout-primary">
+  <p>
+    Not registered yet? <a href="$(linkto(:register))">Register</a>
+  </p>
+</div>

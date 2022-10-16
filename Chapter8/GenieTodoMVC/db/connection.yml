@@ -1,0 +1,21 @@
+env: ENV["GENIE_ENV"]
+
+dev:
+  adapter:  SQLite
+  database: db/dev.sqlite3
+
+test:
+  adapter:  SQLite
+  database: db/test.sqlite3
+
+# prod:
+#   adapter:  SQLite
+#   database: db/prod.sqlite3
+
+prod:
+  adapter:  MySQL
+  database: todomvc
+
+staging:
+  adapter:  SQLite
+  database: db/staging.sqlite3

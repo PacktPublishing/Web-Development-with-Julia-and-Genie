@@ -1,0 +1,30 @@
+<h1 class="display-3">Register</h1>
+
+<p>
+  Please authenticate in order to proceed to the requested resource.
+  <span>$(output_flash())</span>
+</p>
+
+<form method="POST" action="$(linkto(:register))" enctype="multipart/form-data">
+  <div class="form-group">
+    <label _for="auth_username">Username</label>
+    <input type="text" id="auth_username" name="username" class="form-control" placeholder="User" />
+  </div>
+
+  <div class="form-group">
+    <label _for="auth_password">Password</label>
+    <input type="password" id="auth_password" name="password" class="form-control" placeholder="Password" />
+  </div>
+
+  <div class="form-group">
+    <label _for="auth_name">Name</label>
+    <input type="text" id="auth_name" name="name" class="form-control" placeholder="Name" />
+  </div>
+
+  <div class="form-group">
+    <label _for="auth_email">Email</label>
+    <input type="text" id="auth_email" name="email" class="form-control" placeholder="Email" />
+  </div>
+
+  <input type="submit" value="Register" class="btn btn-primary" />
+</form>

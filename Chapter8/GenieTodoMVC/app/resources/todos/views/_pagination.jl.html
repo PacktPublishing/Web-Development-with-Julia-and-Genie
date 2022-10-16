@@ -1,0 +1,29 @@
+<nav>
+  <ul class="pagination pagination-sm" style="justify-content: center;">
+    <% iif(prev_page > 0) do %>
+      <li class="page-item"><a class="page-link" href="/?page=$prev_page">Previous</a></li>
+    <% end %>
+    <% iif(total_pages > MAX_PAGINATION_WIDTH && current_page > PAGINATION_DISPLAY_INTERVAL) do ;[ %>
+      <li class="page-item"><a class="page-link" href="/?page=1">1</a></li>
+      <li class="page-item"><a class="page-link">...</a></li>
+    <% ]; end %>
+    <% for_each(1:total_pages) do page %>
+      <% iif(page > (current_page - PAGINATION_DISPLAY_INTERVAL) && page < (current_page + PAGINATION_DISPLAY_INTERVAL)) do %>
+        <li class="page-item">
+          <% if page == current_page %>
+            <a class="page-link bg-dark text-info">$page</a>
+          <% else %>
+            <a class="page-link" href="/?page=$page">$page</a>
+          <% end %>
+        </li>
+      <% end %>
+    <% end %>
+    <% iif(total_pages > MAX_PAGINATION_WIDTH && current_page < (total_pages - PAGINATION_DISPLAY_INTERVAL)) do ;[ %>
+      <li class="page-item"><a class="page-link">...</a></li>
+      <li class="page-item"><a class="page-link" href="/?page=$total_pages">$total_pages</a></li>
+    <% ]; end %>
+    <% iif(next_page > 0) do %>
+      <li class="page-item"><a class="page-link" href="/?page=$next_page">Next</a></li>
+    <% end %>
+  </ul>
+</nav>
