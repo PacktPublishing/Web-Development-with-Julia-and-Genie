@@ -12,7 +12,7 @@ using Pkg
 Pkg.activate(".")
 
 using Genie
-Genie.loadapp("..")
+Genie.loadapp()
 
 cd(@__DIR__)
 Pkg.activate(".")
