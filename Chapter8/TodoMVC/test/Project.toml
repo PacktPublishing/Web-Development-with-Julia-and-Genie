@@ -1,5 +1,6 @@
 [deps]
 Base64 = "2a0f44e3-6c83-55bd-87e4-b1978d98bd5f"
+Faker = "0efc519c-db33-5916-ab87-703215c3906f"
 Genie = "c43c736e-a2d1-11e8-161f-af95117fbd1e"
 Logging = "56ddb016-857b-54e1-b83d-db4d58db5568"
 Pkg = "44cfe95a-1eb2-52ea-b672-e2afdf69b78f"

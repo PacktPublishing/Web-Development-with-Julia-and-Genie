@@ -14,7 +14,7 @@ using GenieAuthentication.GenieSessionFileSession
 
 
 function show_login()
-  html(:authentication, :login, context = @__MODULE__)
+  html(:authentication, :login, layout = :authentication, context = @__MODULE__)
 end
 
 function login()
@@ -31,7 +31,7 @@ function login()
 end
 
 function success()
-  html(:authentication, :success, context = @__MODULE__)
+  html(:authentication, :success, layout = :authentication, context = @__MODULE__)
 end
 
 function logout()
@@ -43,7 +43,7 @@ function logout()
 end
 
 function show_register()
-  html(:authentication, :register, context = @__MODULE__)
+  html(:authentication, :register, layout = :authentication, context = @__MODULE__)
 end
 
 function register()

@@ -1,5 +1,5 @@
 using Test, SearchLight, Main.UserApp, Main.UserApp.Todos
-using Genie
+import Genie
 import Genie.HTTPUtils.HTTP
 import Genie.Renderers.Json.JSONParser.JSON3
 

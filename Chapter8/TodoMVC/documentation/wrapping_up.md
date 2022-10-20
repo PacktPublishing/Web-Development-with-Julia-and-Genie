@@ -13,14 +13,14 @@ First, let's compute the pagination data, calculating the total number of pages 
 `TodosController.jl` file add:
 
 ```julia
-const TODOS_PER_PAGE = 20
 const PAGINATION_DISPLAY_INTERVAL = 5
 const MAX_PAGINATION_WIDTH = 30
 
 page() = parse(Int, params(:page, "1"))
+per_page() = parse(Int, params(:limit, "20"))
 
 function count_pages()
-  total_pages = count(Todo, user_id = current_user_id()) / TODOS_PER_PAGE |> ceil |> Int
+  total_pages = count(Todo, user_id = current_user_id()) / per_page() |> ceil |> Int
   current_page = page()
   prev_page = current_page - 1
   next_page = current_page < total_pages ? current_page + 1 : 0
@@ -44,8 +44,8 @@ function todos()
     find(Todo, completed = false, user_id = current_user_id())
   else
     # this is updated to take into account the pagination
-    find(Todo;  limit = TODOS_PER_PAGE |> SQLLimit,
-                offset = (page() - 1) * TODOS_PER_PAGE,
+    find(Todo;  limit = per_page() |> SQLLimit,
+                offset = (page() - 1) * per_page(),
                 user_id = current_user_id(),
                 order = "date DESC")
   end
@@ -161,7 +161,7 @@ We have a lot of pages now, and it's getting a bit hard to navigate between them
 Start by editing the view partial in `app/layouts/_main_menu.jl.html` and make it look like this:
 
 ```julia
-<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
+<nav class="navbar navbar-expand-sm navbar-light" style="background-color: #e3f2fd;">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">Genie Todo MVC</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
@@ -244,7 +244,8 @@ Nothing complicated here:
 
 ### Redirecting after login
 
-The final tweak we'll make is to redirect the user to the todo list after they log in. Currently we are using the default implementation from
+As a final touch, we can also improve the authentication flow and experience. For start, we'll redirect the user to the
+todo list after they log in. Currently we are using the default implementation from
 GenieAuthentication, which redirects to the success page. However, this isn't useful for us, so we're better off going straight to the
 todo list after login. Update the `AuthenticationController.jl` file, replacing one line in the `login()` function:
 
@@ -262,4 +263,65 @@ function login()
     redirect(:show_login)
   end
 end
+```
+
+### Changing the authentication layout
+
+Looking at the login and registration pages, we can see the new main menu we've added. However, the menu doesn't really make
+sense for an unauthenticated user. They can't access any of the password protected areas, and the logoff button is useless.
+Let's change the layout for the authentication pages to use a different layout, without the main menu.
+
+Create a new layout file in `app/layouts/authentication.jl.html` and make it look like this:
+
+```julia
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Genie Todo MVC</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/css/app.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="container-fluid">
+      <div class="container">
+        <h1>TodoMVC</h1>
+        <%
+          @yield
+        %>
+      </div>
+    </div>
+  </body>
+</html>
+```
+
+It's similar to the main layout, but without the main menu and minus the `<script>` tags which are not used in the authentication pages.
+
+Now, let's update the `AuthenticationController.jl` file to use this new layout. Replace the following three functions as follows:
+
+```julia
+function show_login()
+  html(:authentication, :login, layout = :authentication, context = @__MODULE__)
+end
+
+function success()
+  html(:authentication, :success, layout = :authentication, context = @__MODULE__)
+end
+
+function show_register()
+  html(:authentication, :register, layout = :authentication, context = @__MODULE__)
+end
+```
+
+For all these function we've made the same change: we've added the `layout = :authentication` parameter to the `html()` function, to
+use the new layout.
+
+### Improving the registration
+
+The authentication pages look good now, but on the registration page we have no links back to the login form, for users that
+already have an account. At the bottom of the `app/resources/authentication/views/register.jl.html` file, add the following, right
+above the closing `</form>` tag from the bottom of the page, under the submit button:
+
+```julia
+<a href="/login">Already have an account? </a>
 ```

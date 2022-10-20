@@ -29,10 +29,11 @@ SearchLight.Validation.validator(::Type{Todo}) = ModelValidator([
   ValidationRule(:duration, TodosValidator.is_int)
 ])
 
-function search(; completed = false, startdate = today() - Month(1), enddate = today(), group = ["date"])
+function search(; completed = false, startdate = today() - Month(1), enddate = today(), group = ["date"], user_id)
   filters = SQLWhereEntity[
       SQLWhereExpression("completed = ?", completed),
-      SQLWhereExpression("date >= ? AND date <= ?", startdate, enddate)
+      SQLWhereExpression("date >= ? AND date <= ?", startdate, enddate),
+      SQLWhereExpression("user_id = ?", user_id)
   ]
 
   DataFrame(Todo, SQLQuery(

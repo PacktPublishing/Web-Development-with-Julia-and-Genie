@@ -85,7 +85,8 @@ end
 ```
 
 We have added a new dependency on the `Dates` module, as our new `date` property is a date instance. This means that
-we also need to declare the dependency in our `Project.toml` file, so make sure to run `pkg> add Dates` in the app's repl. We also
+we also need to declare the dependency in our `Project.toml` file, so make sure to run `pkg> add Dates` in the app's repl as
+well as to add `using Dates` at the top of the module, near the other `using` and `import` statements. We also
 define a `CATEGORIES` constant where we stored the list of possible categories. We then update the `Todo` struct to include the new fields,
 setting their default values to the last category in the list ("other"), today's date and 30 minutes.
 
@@ -125,6 +126,8 @@ randdate() = Dates.today() - Day(rand(0:90))
 randduration() = rand(10:240)
 
 function up()
+  Genie.Configuration.isdev() || return
+
   for i in 1:1_000
     Todo(
       todo = Faker.sentence(),
@@ -145,6 +148,7 @@ function up()
 end
 
 function down()
+  Genie.Configuration.isdev() || return
   throw(SearchLight.Migration.IrreversibleMigrationException(@__MODULE__))
 end
 
@@ -156,6 +160,8 @@ for the new columns. We use the `Faker` package to generate random sentences for
 app as well (`pkg> add Faker`) before running the migration. For the generation of the random categories, dates, and duration values, we declare
 three helper functions (`randcategory`, `randdate`, and `randduration`) that we can reuse to both create new todos and update
 the existing ones (and keep our code DRY).
+
+Also notice that we only run this migration in development mode, so that we don't accidentally overwrite our production data or break our tests.
 
 Now you can run the migration to generate the fake data:
 
@@ -202,7 +208,7 @@ Now we can edit our `DashboardController.jl` file:
 module DashboardController
 
 using GenieFramework
-using TodoMVC.Todos
+using TodoMVC, TodoMVC.Todos
 using Dates
 using GenieAuthentication
 
@@ -406,10 +412,11 @@ We also pass in the `startdate` and `enddate` parameters to filter the todos by 
 Let's create the `Todos.search` function. Open our `Todos.jl` model file and add the following code at the end of the module (inside the module, after the validators block):
 
 ```julia
-function search(; completed = false, startdate = today() - Month(1), enddate = today(), group = ["date"])
+function search(; completed = false, startdate = today() - Month(1), enddate = today(), group = ["date"], user_id)
   filters = SQLWhereEntity[
       SQLWhereExpression("completed = ?", completed),
-      SQLWhereExpression("date >= ? AND date <= ?", startdate, enddate)
+      SQLWhereExpression("date >= ? AND date <= ?", startdate, enddate),
+      SQLWhereExpression("user_id = ?", user_id)
   ]
 
   DataFrame(Todo, SQLQuery(
@@ -422,6 +429,12 @@ function search(; completed = false, startdate = today() - Month(1), enddate = t
     order = ["date ASC", "category ASC"],
   ))
 end
+```
+
+In addition, add this at the top of the module (besides the other `using` and `import` statements):
+
+```julia
+import SearchLight.DataFrames.DataFrame
 ```
 
 Now, going back to our `DashboardController.jl` file, let's add more code to our event handler:

@@ -1,7 +1,7 @@
 module DashboardController
 
 using GenieFramework
-using TodoMVC.Todos
+using TodoMVC, TodoMVC.Todos
 using Dates
 using GenieAuthentication
 
@@ -20,10 +20,10 @@ using GenieAuthentication
   @out todos_by_category_incomplete = PlotData[]
 
   @onchangeany isready, filter_startdate, filter_enddate begin
-    completed_todos = Todos.search(; completed = true, startdate = filter_startdate, enddate = filter_enddate)
-    incompleted_todos = Todos.search(; completed = false, startdate = filter_startdate, enddate = filter_enddate)
-    completed_todos_by_category = Todos.search(; completed = true, group = ["category"], startdate = filter_startdate, enddate = filter_enddate)
-    incompleted_todos_by_category = Todos.search(; completed = false, group = ["category"], startdate = filter_startdate, enddate = filter_enddate)
+    completed_todos = Todos.search(; completed = true, startdate = filter_startdate, enddate = filter_enddate, user_id = current_user_id())
+    incompleted_todos = Todos.search(; completed = false, startdate = filter_startdate, enddate = filter_enddate, user_id = current_user_id())
+    completed_todos_by_category = Todos.search(; completed = true, group = ["category"], startdate = filter_startdate, enddate = filter_enddate, user_id = current_user_id())
+    incompleted_todos_by_category = Todos.search(; completed = false, group = ["category"], startdate = filter_startdate, enddate = filter_enddate, user_id = current_user_id())
 
     total_completed = sum(completed_todos[!,:total_todos])
     total_incompleted = sum(incompleted_todos[!,:total_todos])

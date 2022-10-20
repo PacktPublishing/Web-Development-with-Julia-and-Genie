@@ -13,7 +13,6 @@ using GenieAuthentication
 using TodoMVC.AuthenticationController
 using TodoMVC
 
-const TODOS_PER_PAGE = 20
 const PAGINATION_DISPLAY_INTERVAL = 5
 const MAX_PAGINATION_WIDTH = 30
 
@@ -29,10 +28,11 @@ function count_todos()
 end
 
 page() = parse(Int, params(:page, "1"))
+per_page() = parse(Int, params(:limit, "20"))
 categories() = vcat(SearchLight.query("SELECT DISTINCT category from todos ORDER by category ASC")[!,:category], Todos.CATEGORIES) |> unique! |> sort!
 
 function count_pages()
-  total_pages = count(Todo, user_id = current_user_id()) / TODOS_PER_PAGE |> ceil |> Int
+  total_pages = count(Todo, user_id = current_user_id()) / per_page() |> ceil |> Int
   current_page = page()
   prev_page = current_page - 1
   next_page = current_page < total_pages ? current_page + 1 : 0
@@ -51,8 +51,8 @@ function todos()
   elseif params(:filter, "") == "notdone"
     find(Todo, completed = false, user_id = current_user_id())
   else
-    find(Todo;  limit = TODOS_PER_PAGE |> SQLLimit,
-                offset = (page() - 1) * TODOS_PER_PAGE,
+    find(Todo;  limit = per_page() |> SQLLimit,
+                offset = (page() - 1) * per_page(),
                 user_id = current_user_id(),
                 order = "date DESC")
   end
