@@ -71,10 +71,10 @@ initToDos()
 const HOST = ip"127.0.0.1"
 const PORT = 8080
 const ROUTER = HTTP.Router()
-HTTP.@register(ROUTER, "POST", "/api/todos", createToDo)        # 8A
-HTTP.@register(ROUTER, "GET", "/api/todos/*", getToDo)          # 8B
-HTTP.@register(ROUTER, "PUT", "/api/todos", updateToDo)         # 8C
-HTTP.@register(ROUTER, "DELETE", "/api/todos/*", deleteToDo)    # 8D
+HTTP.register!(ROUTER, "POST", "/api/todos", createToDo)        # 8A
+HTTP.register!(ROUTER, "GET", "/api/todos/*", getToDo)          # 8B
+HTTP.register!(ROUTER, "PUT", "/api/todos", updateToDo)         # 8C
+HTTP.register!(ROUTER, "DELETE", "/api/todos/*", deleteToDo)    # 8D
 
 HTTP.serve(ROUTER, HOST, PORT)
 

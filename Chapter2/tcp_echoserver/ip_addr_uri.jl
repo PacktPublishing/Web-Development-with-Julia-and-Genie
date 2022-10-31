@@ -21,7 +21,7 @@ req = HTTP.Request(
 "Hi there!"                        
 )
 
-uri = URI(HTTP.uri(req))  # URI("https://www.google.com/search?q=mammoth")
+uri = URI(req.target)   # URI("https://www.google.com/search?q=mammoth")
 uri.scheme # "https"
 uri.host   # "www.google.com"
 uri.path   # "/search"

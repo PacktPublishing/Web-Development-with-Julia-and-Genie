@@ -7,7 +7,7 @@ function main()
             a = time_ns()                   # 2
             write(ws, "ping")               # 3
             data, success = readguarded(ws) # 4
-            !success && break               # 5
+            success || break               # 5
             b = time_ns()
             println(String(data), " ", (b - a) / 1000000) # 6
             sleep(0.1)
