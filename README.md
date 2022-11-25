@@ -7,7 +7,7 @@ This is the code repository for [Web Development with Julia and Genie](https://w
 **A hands-on guide to high-performance server-side web development with the Julia programming language**
 
 ## What is this book about?
-JuliaÔÇÖs high-performance and scalability characteristics and its extensive number of packages for visualizing data make it an excellent fit for developing web apps, web services, and web dashboards. The two parts of this book provide complete coverage to build your skills in web development.
+Julia’s high-performance and scalability characteristics and its extensive number of packages for visualizing data make it an excellent fit for developing web apps, web services, and web dashboards. The two parts of this book provide complete coverage to build your skills in web development.
 
 This book covers the following exciting features: 
 * Understand how to make a web server with HTTP.jl and work with JSON data over the web
