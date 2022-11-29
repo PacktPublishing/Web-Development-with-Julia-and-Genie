@@ -65,3 +65,8 @@ is a software engineer and lecturer in Web Programming and Databases. He worked 
 is the Founder CEO at GenieCloud.io. He is a computer scientist with over 20 years of experience as a full stack web developer working on data intensive applications. Adrian is the creator and lead maintainer of Genie framework, the most popular Julia web framework counting over 100K downloads and all-time top 10 most starred Julia package on GitHub. He is a Julia early adopter and open-source contributor to the JuliaLang ecosystem since 2015.
 
 
+
+### Download a free PDF
+
+ <i>If you have already purchased a print or Kindle version of this book, you can get a DRM-free PDF version at no cost.<br>Simply click on the link to claim your free PDF.</i>
+<p align="center"> <a href="https://packt.link/free-ebook/9781801811132">https://packt.link/free-ebook/9781801811132 </a> </p>
