@@ -79,7 +79,7 @@ using GenieAuthentication
         plot = StipplePlotly.Charts.PLOT_TYPE_PIE
       )
     ]
-  end # onchangeany
+  end # onchange
 end # handlers
 
 function index()
