@@ -11,8 +11,8 @@ using GenieAuthentication
 
   @out total_completed = 0
   @out total_incompleted = 0
-  @out total_time_completed = 0
-  @out total_time_incompleted = 0
+  #@out total_time_completed = 0
+  #@out total_time_incompleted = 0
 
   @out todos_by_status_number = PlotData[]
   @out todos_by_status_time = PlotData[]
@@ -27,8 +27,8 @@ using GenieAuthentication
 
     total_completed = sum(completed_todos[!,:total_todos])
     total_incompleted = sum(incompleted_todos[!,:total_todos])
-    total_time_completed = sum(completed_todos[!,:total_time]) / 60 |> round
-    total_time_incompleted = sum(incompleted_todos[!,:total_time]) / 60 |> round
+    #total_time_completed = sum(completed_todos[!,:total_time]) / 60 |> round
+    #total_time_incompleted = sum(incompleted_todos[!,:total_time]) / 60 |> round
 
     todos_by_status_number = [
       PlotData(
@@ -51,14 +51,14 @@ using GenieAuthentication
     todos_by_status_time = [
       PlotData(
         x = completed_todos[!,:todos_date],
-        y = completed_todos[!,:todos_duration],
+        #y = completed_todos[!,:todos_duration],
         name = "Completed",
         plot = StipplePlotly.Charts.PLOT_TYPE_BAR
       ),
 
       PlotData(
         x = incompleted_todos[!,:todos_date],
-        y = incompleted_todos[!,:todos_duration],
+        #y = incompleted_todos[!,:todos_duration],
         name = "Incompleted",
         plot = StipplePlotly.Charts.PLOT_TYPE_BAR
       ),

@@ -6,13 +6,13 @@ function up()
   add_columns(:todos, [
     :category => :string,
     :date => :date,
-    :duration => :int
+    #:duration => :int
   ])
 
   add_indices(:todos, [
     :category,
     :date,
-    :duration
+    #:duration
   ])
 end
 
@@ -20,13 +20,13 @@ function down()
   remove_indices(:todos, [
     :category,
     :date,
-    :duration
+    #:duration
   ])
 
   remove_columns(:todos, [
     :category,
     :date,
-    :duration
+    #:duration
   ])
 end
 

@@ -38,12 +38,14 @@ container([
         cell(class="st-br", [
           bignumber("Total incomplete", :total_incompleted, icon="format_list_numbered", color="negative")
         ])
+        #=
         cell(class="st-br", [
           bignumber("Total time completed", :total_time_completed, icon="format_list_numbered", color="positive")
         ])
         cell(class="st-br", [
           bignumber("Total time incomplete", :total_time_incompleted, icon="format_list_numbered", color="negative")
         ])
+        =#
       ])
     ])
   ])
@@ -56,13 +58,13 @@ container([
       plot(:todos_by_status_number, layout = "{ title: 'Todos by status', xaxis: { title: 'Date' }, yaxis: { title: 'Number of todos' } }")
     ])
   ]) # end area chart -- number of todos by status
-
+#=
   row([ # stacked bar chart -- duration of todos by status
     cell(class="st-module col-12", [
       plot(:todos_by_status_time, layout = "{ barmode: 'stack', title: 'Todos by status and duration', xaxis: { title: 'Date' }, yaxis: { title: 'Total duration' } }")
     ])
   ])  # end stacked bar chart -- duration of todos by status
-
+=#
   row([
     # pie chart -- number of completed todos by category
     cell(class="st-module col-6", [
