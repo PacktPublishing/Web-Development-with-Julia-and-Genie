@@ -1,7 +1,7 @@
 import Genie
 import Logging, LoggingExtras
 import Dates
-
+#=
 function timestamp_logger(logger)
   date_format = "yyyy-mm-dd HH:MM:SS"
 
@@ -23,7 +23,7 @@ function initialize_logging()
 
     LoggingExtras.TeeLogger(LoggingExtras.MinLevelLogger(logger, Genie.config.log_level)) |> timestamp_logger |> global_logger
 
-    nothing
+     nothing
 end
-
+=#
 Genie.Logger.initialize_logging()

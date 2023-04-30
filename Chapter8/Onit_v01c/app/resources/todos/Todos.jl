@@ -20,13 +20,13 @@ const CATEGORIES = ["work", "personal", "family", "hobby", "errands", "shopping"
   user_id::DbId = DbId()
   category::String = CATEGORIES[end]
   date::Date = Dates.today()
-  duration::Int = 30
+  #duration::Int = 30
 end
 
 SearchLight.Validation.validator(::Type{Todo}) = ModelValidator([
   ValidationRule(:todo, TodosValidator.not_empty)
   ValidationRule(:user_id, TodosValidator.dbid_is_not_nothing)
-  ValidationRule(:duration, TodosValidator.is_int)
+  #ValidationRule(:duration, TodosValidator.is_int)
 ])
 
 function search(; completed = false, startdate = today() - Month(1), enddate = today(), group = ["date"], user_id)
@@ -38,7 +38,7 @@ function search(; completed = false, startdate = today() - Month(1), enddate = t
 
   DataFrame(Todo, SQLQuery(
     columns = SQLColumns(Todo, (
-      total_time = SQLColumn("SUM(duration) AS total_time", raw = true),
+      #total_time = SQLColumn("SUM(duration) AS total_time", raw = true),
       total_todos = SQLColumn("COUNT(*) AS total_todos", raw = true),
     )),
     where = filters,

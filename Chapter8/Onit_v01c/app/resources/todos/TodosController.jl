@@ -67,7 +67,7 @@ end
 function create()
   authenticated!()
 
-  todo = Todo(todo = params(:todo), category = params(:category), duration = params(:duration), user_id = current_user_id())
+  todo = Todo(todo = params(:todo), category = params(:category), user_id = current_user_id())
 
   validator = validate(todo)
   if haserrors(validator)
