@@ -381,7 +381,7 @@ Now that we have our UI ready, we need to update it with the actual data. Back t
 reactive variable declaration, add the following code:
 
 ```julia
-@onchangeany isready, filter_startdate, filter_enddate begin
+@onchange isready, filter_startdate, filter_enddate begin
 
 # we'll add more code here
 

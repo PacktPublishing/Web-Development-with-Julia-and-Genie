@@ -19,7 +19,7 @@ using GenieAuthentication
   @out todos_by_category_complete = PlotData[]
   @out todos_by_category_incomplete = PlotData[]
 
-  @onchangeany isready, filter_startdate, filter_enddate begin
+  @onchange isready, filter_startdate, filter_enddate begin
     completed_todos = Todos.search(; completed = true, startdate = filter_startdate, enddate = filter_enddate, user_id = current_user_id())
     incompleted_todos = Todos.search(; completed = false, startdate = filter_startdate, enddate = filter_enddate, user_id = current_user_id())
     completed_todos_by_category = Todos.search(; completed = true, group = ["category"], startdate = filter_startdate, enddate = filter_enddate, user_id = current_user_id())
