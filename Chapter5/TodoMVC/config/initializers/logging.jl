@@ -1,7 +1,7 @@
 import Genie
 import Logging, LoggingExtras
 import Dates
-
+#=
 function timestamp_logger(logger)
     date_format = "yyyy-mm-dd HH:MM:SS"
 
@@ -34,5 +34,5 @@ function initialize_logging()
 
     nothing
 end
-
+=#
 initialize_logging()

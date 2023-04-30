@@ -1,3 +1,6 @@
+<div align="right">
+  <a href="$(linkto(:logout))">Logout</a>
+</div>
 <% partial("app/resources/todos/views/_messages.jl.html") %>
 <% partial("app/resources/todos/views/_form.jl.html") %>
 <% if isempty(todos) && params(:filter, "") == "done" %>

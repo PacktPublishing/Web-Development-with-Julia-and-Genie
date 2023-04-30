@@ -2,11 +2,14 @@ import Genie
 import Logging, LoggingExtras
 import Dates
 
+#=
 function timestamp_logger(logger)
   date_format = "yyyy-mm-dd HH:MM:SS"
 
+ #= LoggingExtras.TransformerLogger(logger) do log
+    merge(log, (; message = "$(Dates.format(Dates.now(), date_format)) $(log.message)")) =#
   LoggingExtras.TransformerLogger(logger) do log
-    merge(log, (; message = "$(Dates.format(Dates.now(), date_format)) $(log.message)"))
+    invokelatest(()->merge(log, (; message = "$(Dates.format(Dates.now(), date_format)) $(log.message)")))  
   end
 end
 
@@ -26,4 +29,4 @@ function initialize_logging()
   nothing
 end
 
-initialize_logging()
+initialize_logging()=#
