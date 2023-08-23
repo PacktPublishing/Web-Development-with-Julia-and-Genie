@@ -2,6 +2,8 @@
 using WebIO
 
 using Blink
+
+w = Window()
 # showing a text paragraph:
 body!(w, dom"p"("Hello from WebIO and Blink!"))
 
